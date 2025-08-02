@@ -1,3 +1,4 @@
+
 import streamlit as st
 import cv2
 import numpy as np
@@ -7,20 +8,26 @@ from datetime import datetime
 
 # Setup
 mp_pose = mp.solutions.pose
-pose = mp_pose.Pose(static_image_mode=True)
+mp_holistic = mp.solutions.holistic
+pose_detector = mp_holistic.Holistic(static_image_mode=True)
 os.makedirs("uploads", exist_ok=True)
 os.makedirs("outputs", exist_ok=True)
 
 def detect_people(image):
-    results = pose.process(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+    # NOTE: Only one person detected per frame in MediaPipe default models.
+    # Workaround using multiple detections is not available in standard MediaPipe.
+    # So we use a simple people detector using Haar cascades or HOG + Nose
+    # OpenCV DNN face detector or YOLO etc. could be used for better results.
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     people = []
-    if results.pose_landmarks:
-        landmarks = results.pose_landmarks.landmark
-        nose = landmarks[mp_pose.PoseLandmark.NOSE]
-        if nose.visibility > 0.5:
-            h, w, _ = image.shape
-            cx, cy = int(nose.x * w), int(nose.y * h)
-            people.append((cx, cy))
+
+    # Use face detector as proxy for person
+    face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_upperbody.xml')
+    faces = face_cascade.detectMultiScale(gray, 1.1, 5)
+    for (x, y, w, h) in faces:
+        cx, cy = x + w // 2, y + h // 3  # Estimate top body center
+        people.append((cx, cy))
+
     return people
 
 def draw_boxes_and_lines(image, people):
@@ -105,4 +112,3 @@ if uploaded_file:
     output_path = img_path.replace("uploads", "outputs")
     cv2.imwrite(output_path, processed_img)
     st.download_button("⬇️ Download Judged Image", open(output_path, "rb"), file_name="sneeze_judged.jpg")
-
