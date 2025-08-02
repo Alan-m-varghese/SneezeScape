@@ -1,6 +1,8 @@
 streamlit
-opencv-python
+opencv-contrib-python
 mediapipe
 numpy
-opencv-contrib-python
+Pillow
+matplotlib
+
 
