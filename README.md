@@ -1,11 +1,13 @@
 # 🦠 SneezeScape: A Distance Judgment Framework
 
 > **Upload your group photo. We measure the closeness you had with them.**  
-> *Built for pandemic nostalgia. Powered by AI. Judging you silently since 2025.*  
+> *Built for pandemic nostalgia. Powered by AI. Judging you silently since 2025.*
 
+## 🚀 Check it out :
+    https://sneezescape.streamlit.app/
 ---
 
-![sneezescape-banner](https://user-images.githubusercontent.com/your-image-placeholder/banner.png)
+
 
 ## 📷 What is SneezeScape?
 
