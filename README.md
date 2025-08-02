@@ -38,17 +38,7 @@ This is a *completely unnecessary* tool that nobody asked for, but everyone dese
 
 ---
 
-## 📂 Folder Structure
 
-sneezescape/
-├── app.py # Streamlit app code
-├── requirements.txt # Python dependencies
-├── README.md # You're reading it!
-├── uploads/ # Uploaded images (auto-created)
-├── outputs/ # Processed output images (auto-created)
-
-
----
 
 ## ⚙️ Installation
 
