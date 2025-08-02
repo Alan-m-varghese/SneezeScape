@@ -93,7 +93,7 @@ if uploaded_file:
 
     # Stylish score box
     st.markdown(f"""
-    <div style="background-color:#f0f0f5; padding: 20px; border-radius: 10px; margin-top:20px;">
+    <div style="background-color:#f0f0f5; color= #343434; padding: 20px; border-radius: 10px; margin-top:20px;">
         <h2>🧪 Distance Score: <span style="color:#FF4B4B">{score}/100</span></h2>
         <p><strong>👥 People Detected:</strong> {len(people)}</p>
         <p><strong>⚠️ Violations:</strong> {violations}</p>
@@ -105,3 +105,4 @@ if uploaded_file:
     output_path = img_path.replace("uploads", "outputs")
     cv2.imwrite(output_path, processed_img)
     st.download_button("⬇️ Download Judged Image", open(output_path, "rb"), file_name="sneeze_judged.jpg")
+
